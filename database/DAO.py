@@ -8,7 +8,7 @@ class DAO():
         pass
 
     @staticmethod
-    def getAllFlights(distance):
+    def getAllFlights():
         conn = DBConnect.get_connection()
 
         result = []
@@ -16,10 +16,9 @@ class DAO():
         cursor = conn.cursor(dictionary=True)
         query = """ SELECT origin_airport_id, destination_airport_id, distance
                     from flights
-                    where distance <= %s
-                    order by distance"""
+                    """
 
-        cursor.execute(query, (distance,))
+        cursor.execute(query)
 
         for row in cursor:
             result.append(Volo(row["origin_airport_id"], row["destination_airport_id"], row["distance"]))
@@ -42,7 +41,7 @@ class DAO():
         cursor.execute(query)
 
         for row in cursor:
-            result.append(Airport(row["id"], row["iata_code"], row["airport"], row["city"],row["state"], row["country"], row["latitude"], row["longitude"], row["timezone_offset"]))
+            result.append(Airport(row["ID"], row["IATA_CODE"], row["AIRPORT"], row["CITY"],row["STATE"], row["COUNTRY"], row["LATITUDE"], row["LONGITUDE"], row["TIMEZONE_OFFSET"]))
         cursor.close()
         conn.close()
         return result
