@@ -9,4 +9,5 @@ class Controller:
         self._model = model
 
     def handleAnalizza(self,e):
-        pass
+        distanza = int(self._view._txtIn.value)
+        self._model.loadVoli(distanza)
